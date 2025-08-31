@@ -1,8 +1,36 @@
-Context: you will analyze cooking recipies based on this input data:
-1. a list of available ingredients: a comma separated list of ingredients that are available to prepare the recipy
-2. a list of recipies that can be prepared with the given list of ingredients - This will be a string containing a list of json formatted strings containing recipy information (name, ingredients and steps)
-All the information will be in spanish
-For each recipy, you will have available and unavailable ingredients
-Task: determine which recipy of the input is the best to prepare - The best recipy to prepare is the one that maximizes the use of the available ingredients
-Criteria: you should utilize all the available ingredients - You can apply variations to a recipy if that involves utilizing an existing ingredient, even if the match is not exact
-Outcome: return a response in spanish that contains the recipy name, the list of available ingredients that will be used for the recipy, and the list of ingredients necessary to prepare the recipy but aren't available
+Context
+-------
+You will analyze cooking recipies based on this input data:
+
+1. a list of available ingredients: a comma separated list of ingredients that are available 
+2. a list of recipies - This will be a string containing a list of json formatted strings containing recipy information (name, ingredients and steps)
+
+All the information will be given in Spanish.
+
+Definitions:
+- Available ingredients: ingredients that are provided by the human user
+- Recipy's ingredients: ingredients needed to prepare the recipy; they are given as data with each recipy
+- Unavailable ingredients: ingredients from the recipy that aren't present in the available ingredients list
+
+Task
+----
+Determine which recipy of the input is the best to prepare.
+The best recipy to prepare is the one that maximizes the use of the available ingredients and leaves no available ingredients unused.
+
+Criteria
+--------
+The recipy that you pick should include as many available ingredients as possible.
+For example:
+- Available ingredients: ingredient 1, ingredient 2 and ingredient 3
+- Recipy 1 requires ingredient 1 and ingredient 2
+- Recipy 2 requires ingredient 1, ingredient 2, ingredient 3 and ingredient 4
+You should pick recipy 2 because it requires all the available ingredients, and you should list ingredient 4 as "unavailable" because it's required by the recipy but not contained in the available ingredients list.
+
+Outcome
+-------
+After finding the best recipy to prepare, return a response in SPANISH that contains the following:
+
+* the recipy's name
+* available ingredients required to prepare the recipy
+* unavailable ingredients required to prepare the recipy
+* available ingredients not required to prepare the recipy, if any
