@@ -78,3 +78,8 @@ class RecipyContext:
 def _row_to_json(name: str, ingredients: str, steps: str) -> str:
     recipy_data = RecipyData(name, ingredients, steps)
     return json.dumps(recipy_data.__dict__)
+
+
+def json_to_recipy_data(json_string: str) -> RecipyData:
+    data = json.loads(json_string)
+    return RecipyData(**data)
