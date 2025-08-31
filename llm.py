@@ -35,7 +35,7 @@ def _format_recipies(recipies: List[str]) -> str:
 
 
 def read_system_prompt(file_name: str) -> str:
-    file = open("system_prompt.txt", "r")
+    file = open(file_name, "r")
     system_prompt = file.read()
     file.close()
     return system_prompt
