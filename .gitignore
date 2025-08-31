@@ -2,3 +2,4 @@ venv/
 ollama/
 __pycache__/
 *.pickle
+recipystorage.chroma/
