@@ -35,7 +35,7 @@ if __name__ == "__main__":
         f"Los ingredientes que tengo son: {", ".join(available_ingredients)}"
     )
 
-    llm = Llm(url="http://localhost:11434")
+    llm = Llm(url="http://localhost:11434", sys_prompt_filename="system_prompt.txt")
     selected_recipy = llm.ask_recipy(
         ingredients=available_ingredients, recipies=recipies
     )

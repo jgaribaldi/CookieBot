@@ -4,18 +4,9 @@ import ollama
 
 
 class Llm:
-    def __init__(self, url: str):
+    def __init__(self, url: str, sys_prompt_filename: str):
         self._client = ollama.Client(host=url)
-        system_prompt = (
-            "Context: you will analyze cooking recipies based on this input data:"
-            "1. a list of available ingredients: a comma separated list of ingredients that are available to prepare the recipy"
-            "2. a list of recipies that can be prepared with the given list of ingredients - This will be a string containing a list of json formatted strings containing recipy information (name, ingredients and steps)"
-            "All the information will be in spanish"
-            "For each recipy, you will have available and unavailable ingredients"
-            "Task: determine which recipy of the input is the best to prepare - The best recipy to prepare is the one that maximizes the use of the available ingredients"
-            "Criteria: you should utilize all the available ingredients - You can apply variations to a recipy if that involves utilizing an existing ingredient, even if the match is not exact"
-            "Outcome: return a response in spanish that contains the recipy name, the list of available ingredients that will be used for the recipy, and the list of ingredients necessary to prepare the recipy but aren't available"
-        )
+        system_prompt = read_system_prompt(sys_prompt_filename)
         self._system_message = ollama.Message(role="system", content=system_prompt)
         self._user_message_1 = "List of available ingredients: {ingredients}"
         self._user_message_2 = "List of recipies: {recipies}"
@@ -41,3 +32,10 @@ def _format_recipies(recipies: List[str]) -> str:
     for number, recipy in enumerate(recipies):
         result += f"Receta {number}: {recipy}\n"
     return result
+
+
+def read_system_prompt(file_name: str) -> str:
+    file = open("system_prompt.txt", "r")
+    system_prompt = file.read()
+    file.close()
+    return system_prompt
