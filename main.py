@@ -23,7 +23,7 @@ class CookieBotAgent:
 if __name__ == "__main__":
     print("Hello CookieBot")
 
-    available_ingredients = ["huevos", "cebollas", "pescado"]
+    available_ingredients = ["huevos", "cebollas", "merluza"]
     query = f"Los ingredientes que tengo son: {", ".join(available_ingredients)}"
 
     recipy_storage = RecipyStorage(file_path="data/recipystorage.chroma")
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     recipies = agent.process_request(query)
 
     if recipies:
-        llm = Llm(url="http://localhost:11434", sys_prompt_filename="system_prompt.txt")
+        llm = Llm(sys_prompt_filename="system_prompt.txt")
         selected_recipy = llm.ask_recipy(
             ingredients=available_ingredients, recipies=recipies
         )

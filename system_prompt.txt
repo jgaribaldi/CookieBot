@@ -8,9 +8,9 @@ You will analyze cooking recipies based on this input data:
 All the information will be given in Spanish.
 
 Definitions:
-- Available ingredients: ingredients that are provided by the human user
+- Available ingredients: ingredients that are listed in the given comma separated list of ingredients
 - Recipy's ingredients: ingredients needed to prepare the recipy; they are given as data with each recipy
-- Unavailable ingredients: ingredients from the recipy that aren't present in the available ingredients list
+- Unavailable ingredients: ingredients from the recipy that aren't present in the comma separated list of ingredients
 
 Task
 ----
