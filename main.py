@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 from context import RecipyData, RecipyStorage, json_to_recipy_data
@@ -10,7 +11,10 @@ class CookieBotAgent:
 
     def process_request(self, request: str) -> List[str]:
         recipies = self._get_recipies(request)
-        return [recipy.name for recipy in recipies]
+        return [
+            json.dumps({"name": recipy.name, "ingredients": recipy.ingredients})
+            for recipy in recipies
+        ]
 
     def _get_recipies(self, request: str) -> List[RecipyData]:
         recipies = self._recipy_storage.find_similar(request, 10)
@@ -22,16 +26,17 @@ class CookieBotAgent:
 
 if __name__ == "__main__":
     print("Hello CookieBot")
-
+    create_embeddings = False
     available_ingredients = ["huevos", "cebollas", "merluza"]
-    query = f"Los ingredientes que tengo son: {", ".join(available_ingredients)}"
 
     recipy_storage = RecipyStorage(file_path="data/recipystorage.chroma")
-    # recipy_storage.add_data("data/recetasdelaabuela.csv")
-    # print("Finsihed adding data")
-    recipies = recipy_storage.find_similar(query, 10)
+
+    if create_embeddings:
+        recipy_storage.add_data("data/recetasdelaabuela.csv")
+        print("Finsihed adding data")
 
     agent = CookieBotAgent(recipy_storage)
+    query = f"Los ingredientes que tengo son: {", ".join(available_ingredients)}"
     recipies = agent.process_request(query)
 
     if recipies:
