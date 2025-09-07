@@ -25,6 +25,7 @@ For example:
 - Recipy 1 requires ingredient 1 and ingredient 2
 - Recipy 2 requires ingredient 1, ingredient 2, ingredient 3 and ingredient 4
 You should pick recipy 2 because it requires all the available ingredients, and you should list ingredient 4 as "unavailable" because it's required by the recipy but not contained in the available ingredients list.
+Consider using available ingredients as "substitutes", especially if the recipy requires "generic" ingredients, like "meat": if the user has a particular type of meat listed as available ingredient, consider that ingredient "available". The goal is to maximize the amount of available ingredients used.
 
 Outcome
 -------

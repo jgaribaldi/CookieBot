@@ -44,7 +44,7 @@ if __name__ == "__main__":
     create_embeddings = False
     available_ingredients = ["huevos", "cebollas", "merluza"]
 
-    recipy_storage = RecipyStorage(file_path="data/recipystorage.chroma")
+    recipy_storage = RecipyStorage(file_path="data/recipies_db")
 
     if create_embeddings:
         recipy_storage.add_data("data/recetasdelaabuela.csv")

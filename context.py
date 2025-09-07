@@ -3,6 +3,7 @@ from typing import List, Optional
 
 import chromadb
 import pandas
+from chromadb.utils import embedding_functions
 from chromadb.utils.batch_utils import create_batches
 from torch import Tensor
 
@@ -28,6 +29,9 @@ class RecipyStorage:
             metadata={
                 "description": "set of recipies in Spanish",
             },
+            embedding_function=embedding_functions.SentenceTransformerEmbeddingFunction(
+                model_name="sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+            ),
         )
 
     def find_similar(self, query: str, top_k: int) -> Optional[List[str]]:

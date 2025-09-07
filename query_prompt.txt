@@ -1,1 +1,1 @@
-Los ingredientes que tengo son: {ingredients}
+Busco recetas con {ingredients} como ingredientes principales

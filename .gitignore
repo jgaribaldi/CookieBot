@@ -2,4 +2,4 @@ venv/
 ollama/
 __pycache__/
 *.pickle
-recipystorage.chroma/
+data/recipies_db/
