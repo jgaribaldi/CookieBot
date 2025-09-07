@@ -49,9 +49,9 @@ if __name__ == "__main__":
     if create_embeddings:
         recipy_storage.add_data("data/recetasdelaabuela.csv")
         print("Finsihed adding data")
+    else:
+        llm = Llm(sys_prompt_filename="system_prompt.txt")
 
-    llm = Llm(sys_prompt_filename="system_prompt.txt")
-
-    agent = CookieBotAgent(recipy_storage, llm, "query_prompt.txt")
-    suggested_recipy = agent.process_request(available_ingredients)
-    print(suggested_recipy)
+        agent = CookieBotAgent(recipy_storage, llm, "query_prompt.txt")
+        suggested_recipy = agent.process_request(available_ingredients)
+        print(suggested_recipy)
