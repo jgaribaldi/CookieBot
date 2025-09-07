@@ -1,3 +1,4 @@
+import argparse
 import json
 from typing import List, Optional
 
@@ -20,7 +21,7 @@ class CookieBotAgent:
                 for recipy in recipies
             ]
             if llm_data:
-                return llm.ask_recipy(
+                return self._llm.ask_recipy(
                     ingredients=available_ingredients, recipies=llm_data
                 )
             else:
@@ -39,14 +40,27 @@ class CookieBotAgent:
             return []
 
 
-if __name__ == "__main__":
+def _parse_arguments() -> bool:
+    parser = argparse.ArgumentParser(
+        description="CookieBot: reads available ingredients and suggests recipies"
+    )
+    parser.add_argument(
+        "-c",
+        "--create-embeddings",
+        help="Reads the input csv file and creates embeddings in ChromaDB",
+        action="store_true",
+    )
+    args = parser.parse_args()
+    return args.create_embeddings
+
+
+def main() -> int:
     print("Hello CookieBot")
-    create_embeddings = False
     available_ingredients = ["huevos", "cebollas", "merluza"]
 
     recipy_storage = RecipyStorage(file_path="data/recipies_db")
 
-    if create_embeddings:
+    if _parse_arguments():
         recipy_storage.add_data("data/recetasdelaabuela.csv")
         print("Finsihed adding data")
     else:
@@ -55,3 +69,8 @@ if __name__ == "__main__":
         agent = CookieBotAgent(recipy_storage, llm, "query_prompt.txt")
         suggested_recipy = agent.process_request(available_ingredients)
         print(suggested_recipy)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())
