@@ -29,9 +29,11 @@ Consider using available ingredients as "substitutes", especially if the recipy 
 
 Outcome
 -------
-After finding the best recipy to prepare, return a response in SPANISH that contains the following:
+After finding the best recipy to prepare, return a response in {language} that contains the following:
 
 * the recipy's name
 * available ingredients required to prepare the recipy
 * unavailable ingredients required to prepare the recipy
 * available ingredients not required to prepare the recipy, if any
+
+Be mindful about the ingredients' names: make sure that you return the names in {language}, you should use words that can be understood in the language's country.

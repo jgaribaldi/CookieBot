@@ -8,9 +8,9 @@ from common import read_text_file
 
 
 class Llm:
-    def __init__(self, sys_prompt_filename: str):
+    def __init__(self, sys_prompt_filename: str, language: str):
         self._client = anthropic.Client(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-        system_prompt = read_text_file(sys_prompt_filename)
+        system_prompt = read_text_file(sys_prompt_filename).format(language=language)
         self._system_message = MessageParam(
             role="assistant",
             content=system_prompt,
